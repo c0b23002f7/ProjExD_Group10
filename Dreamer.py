@@ -50,8 +50,8 @@ class Hiroin:
         if self.is_jumping:
             self.rct.y -= self.jump_speed
             self.jump_speed -= self.gravity
-            if self.rct.bottom >= 500:  # 地面に到達した場合
-                self.rct.bottom = 500
+            if self.rct.bottom >= 700:  # 地面に到達した場合
+                self.rct.bottom = 700
                 self.is_jumping = False
                 self.jump_speed = 15
         self.rct.move_ip(sum_mv)
@@ -61,11 +61,11 @@ class Hiroin:
         screen.blit(self.img, self.rct)
 def main():
     pg.display.set_caption("はばたけ！こうかとん")
-    screen = pg.display.set_mode((1100, 650))
+    screen = pg.display.set_mode((1200, 700))
     clock  = pg.time.Clock()
     bg_img = pg.image.load("fig/24535830.jpg") #背景画像
     # bg_img2 = pg.transform.flip(bg_img, True, False) #背景画像
-    hl_img = Hiroin((100, 400))
+    hl_img = Hiroin((100, 630))
 
     show_hl_img = False
     # hl_img = pg.image.load("file.png")
