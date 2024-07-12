@@ -161,9 +161,9 @@ def main():
                 pg.quit()
                 sys.exit()
             elif event.type == pg.KEYDOWN:
-                if event.key == pg.K_RETURN:
-                    show_hl_img = not show_hl_img
-                elif event.key == pg.K_2:
+            #     if event.key == pg.K_RETURN:
+            #         show_hl_img = not show_hl_img
+                if event.key == pg.K_2:
                     show_hl_img = True
                     show_mk_img = False
                 elif event.key == pg.K_3:
