@@ -4,7 +4,6 @@ import pygame as pg
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-
 class HP:
     def __init__(self, x, y, max_hp, width=400, height=30):
         self.x = x
@@ -184,13 +183,13 @@ class Mika:
 
 
 class Frame:
-    def __init__(self, frame_x=20, frame_y=570, frame_width=200, frame_height=125):
+    def __init__(self, frame_x=20, frame_y=570, frame_width=120, frame_height=120):
         self.frame_x = frame_x  # 枠の始点x軸
         self.frame_y = frame_y  # 枠の始点y軸
         self.frame_width = frame_width  # 横幅
         self.frame_height = frame_height  # 縦幅
-        self.hiroin_img = pg.transform.rotozoom(pg.image.load("fig/file.png"), 0, 0.6)
-        self.mika_img = pg.transform.rotozoom(pg.image.load("fig/mika.png"), 0, 0.4)
+        self.hiroin_img = pg.transform.rotozoom(pg.image.load("fig/hiroin_file(3).png"), 0, 0.8)
+        self.mika_img = pg.transform.rotozoom(pg.image.load("fig/mika_file(3).png"), 0, 0.6)
 
     def draw(self, screen, show_hiroin: bool, show_mika: bool):
         # キャラの表示
@@ -214,8 +213,11 @@ def main():
     # 背景画像をロードして、ウインドウのサイズにリサイズ
     back_img = pg.image.load("fig/24535830.jpg")
     back_img = pg.transform.scale(back_img, (1200, 700))
-    hiroin = Hiroin((100, 500))
-    mika = Mika((100, 500))
+    
+    # 初期キャラクターと位置を設定
+    char_pos = (100, 500)
+    hiroin = Hiroin(char_pos)
+    mika = Mika(char_pos)
     frame = Frame()
     show_hiroin = True
     show_mika = False
@@ -231,9 +233,13 @@ def main():
                 if event.key == pg.K_2 and show_hiroin:
                     show_hiroin = False
                     show_mika = True
+                    char_pos = hiroin.rct.center  # 現在の位置を保存
+                    mika.rct.center = char_pos    # 位置を引き継ぐ
                 elif event.key == pg.K_3 and show_mika:
                     show_mika = False
                     show_hiroin = True
+                    char_pos = mika.rct.center   # 現在の位置を保存
+                    hiroin.rct.center = char_pos  # 位置を引き継ぐ
                 elif event.key == pg.K_d:
                     if show_hiroin:
                         player_hp.take_damage(10)
